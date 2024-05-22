@@ -1,0 +1,8 @@
+def fib(n: int) -> int:
+    if n <= 3:
+        return n
+    
+    return fib(n - 1) + fib(n - 2)
+
+x: int = 3
+print_int(fib(3))

@@ -1,0 +1,8 @@
+x : int = 1
+
+while x < 100:
+    print_int(x)
+    break
+    x += 3
+    if x>10:
+        break

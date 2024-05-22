@@ -1,0 +1,10 @@
+def return_bool(b: bool) -> bool:
+INDENT     return True
+DEDENT 
+x: float = 3.0
+y: float = 4.0
+
+z: bool = ((x + y) < 7.01) ^ ((x + y) > 6.99)
+
+print_bool(z)
+

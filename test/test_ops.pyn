@@ -1,0 +1,17 @@
+x:int = 4
+y:int = 5
+
+a: float = 4.0
+b: float = 4.0
+
+print_int(x + y)
+print_int(x - y)
+print_int(x * y)
+print_int(x % y)
+z:float = a/x
+
+print_float(z)
+print_float(x/y)
+print_float(x/a)
+print_float(a/b)
+print_float(a/x)

@@ -1,0 +1,13 @@
+def return_bool(b: bool) -> bool:
+    return True
+
+x: float = 3.0
+y: float = 4.0
+
+a: bool = True
+
+z: bool = ((x + y) < 7.01) and ((x + y) > 6.99)
+
+print_bool(z)
+print_bool(True)
+print_bool(False)
