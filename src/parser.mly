@@ -134,7 +134,7 @@ expr:
     | expr LSHIFT expr              { Binop($1, LShift, $3)         }
     | expr RSHIFT expr              { Binop($1, RShift, $3)  	    }
     | expr MOD expr                 { Binop($1, Mod, $3)            }
-    | expr BITXOR expr              { Binop($1, Less, $3)           }
+    | expr BITXOR expr              { Binop($1, Xor, $3)           }
     | variable WALRUS expr          { Walrus($1, $3)                }
     | LPAREN expr RPAREN            { $2                            }
     | function_call                 { $1                            }

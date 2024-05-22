@@ -6,7 +6,7 @@ y: float = 4.0
 
 a: bool = True
 
-z: bool = ((x + y) < 7.01) and ((x + y) > 6.99)
+z: bool = ((x + y) < 7.01) ^ ((x + y) > 6.99)
 
 print_bool(z)
 print_bool(True)
