@@ -13,6 +13,7 @@ rule tokenize = parse
 | '+' { PLUS }
 | '-' { MINUS }
 | '*' { TIMES }
+| "//" {FLOORDIVIDE}
 | '/' { DIVIDE }
 | '(' { LPAREN }
 | ')' { RPAREN }
@@ -22,7 +23,6 @@ rule tokenize = parse
 | '}' {DEDENT}
 | ',' {COMMA}
 | "**" { EXPONENT }
-| "//" {FLOORDIVIDE}
 | '%' { MOD }
 | "<<" { LSHIFT }
 | ">>" { RSHIFT }

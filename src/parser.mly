@@ -121,6 +121,7 @@ expr:
     | expr MINUS expr               { Binop($1, Sub, $3)            }
     | expr TIMES expr               { Binop($1, Mult, $3)            }
     | expr DIVIDE expr              { Binop($1, Div, $3)            }
+    | expr FLOORDIVIDE expr         { Binop($1, FDiv, $3)            }
     | expr EQ expr                  { Binop($1, Eq, $3)             }
     | expr NEQ expr                 { Binop($1, Neq, $3)            }
     | expr GEQ expr                 { Binop($1, Geq, $3)            }

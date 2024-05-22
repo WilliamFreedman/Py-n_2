@@ -205,13 +205,13 @@ and check_dict var_table func_table dict_elems key_type value_type =
 
 and binop_return_type t1 op t2 =
   match op with
-  | Add | Sub | Mult -> (
+  | Add | Sub | Mult | Mod | Exp -> (
       match (t1, t2) with
       | TypeVariable "int", TypeVariable "int" -> TypeVariable "int"
       | TypeVariable "float", TypeVariable "float" -> TypeVariable "float"
       | TypeVariable "float", TypeVariable "int" -> TypeVariable "float"
       | TypeVariable "int", TypeVariable "float" -> TypeVariable "float"
-      | _, _ -> raise (Failure "add sub mult: Invalid binop types"))
+      | _, _ -> raise (Failure (binop_err_msg t1 t2 op)))
   | Eq -> (
       match (t1, t2) with
       | TypeVariable "bool", TypeVariable "bool" -> TypeVariable "bool"
@@ -219,7 +219,7 @@ and binop_return_type t1 op t2 =
       | TypeVariable "float", TypeVariable "int" -> TypeVariable "bool"
       | TypeVariable "int", TypeVariable "float" -> TypeVariable "bool"
       | TypeVariable "int", TypeVariable "int" -> TypeVariable "bool"
-      | _, _ -> raise (Failure "eq: Invalid binop types"))
+      | _, _ -> raise (Failure (binop_err_msg t1 t2 op)))
   | Neq | Less | More | Geq | Leq -> (
       match (t1, t2) with
       | TypeVariable "int", TypeVariable "int" -> TypeVariable "bool"
@@ -227,45 +227,36 @@ and binop_return_type t1 op t2 =
       | TypeVariable "float", TypeVariable "int" -> TypeVariable "bool"
       | TypeVariable "int", TypeVariable "float" -> TypeVariable "bool"
       | _, _ -> raise (Failure (binop_err_msg t1 t2 op)))
-  | Mod -> (
-      match (t1, t2) with
-      | TypeVariable "int", TypeVariable "int" -> TypeVariable "int"
-      | TypeVariable "float", TypeVariable "int" -> TypeVariable "float"
-      | _, _ -> raise (Failure "mod: Invalid binop types"))
   | LShift | RShift -> (
       match (t1, t2) with
       | TypeVariable "int", TypeVariable "int" -> TypeVariable "int"
-      | _, _ -> raise (Failure "lshift rshift: Invalid binop types"))
+      | _, _ -> raise (Failure (binop_err_msg t1 t2 op)))
   | And | Or | Xor -> (
       match (t1, t2) with
       | TypeVariable "bool", TypeVariable "bool" -> TypeVariable "bool"
-      | _, _ -> raise (Failure "and or xor: Invalid binop types"))
+      | _, _ -> raise (Failure (binop_err_msg t1 t2 op)))
   | BitAnd | BitOr | BitXor -> (
       match (t1, t2) with
       | TypeVariable "int", TypeVariable "int" -> TypeVariable "int"
-      | TypeVariable "float", TypeVariable "float" -> TypeVariable "float"
-      |  TypeVariable "bool", TypeVariable "bool" -> TypeVariable "bool"
-      | _, _ -> raise (Failure "bitand bitor bitxor: Invalid binop types"))
+      | _, _ -> raise (Failure (binop_err_msg t1 t2 op)))
   | Iden -> (
       match (t1, t2) with
       | t1, t2 when t1 = t2 -> t1
-      | _, _ -> raise (Failure "iden: Invalid binop types"))
+      | _, _ -> raise  (Failure (binop_err_msg t1 t2 op)))
   | FDiv -> (
-      match (t1, t2) with
-      | TypeVariable "int", TypeVariable "int" -> TypeVariable "int"
-      | _, _ -> raise (Failure "fdiv: Invalid binop types"))
+    match (t1, t2) with
+    | TypeVariable "int", TypeVariable "int" -> TypeVariable "int"
+    | TypeVariable "float", TypeVariable "float" -> TypeVariable "int"
+    | TypeVariable "int", TypeVariable "float" -> TypeVariable "int"
+    | TypeVariable "float", TypeVariable "int" -> TypeVariable "int"
+    | _, _ -> raise (Failure (binop_err_msg t1 t2 op)))
   | Div -> (
       match (t1, t2) with
       | TypeVariable "int", TypeVariable "int" -> TypeVariable "float"
       | TypeVariable "float", TypeVariable "float" -> TypeVariable "float"
       | TypeVariable "int", TypeVariable "float" -> TypeVariable "float"
       | TypeVariable "float", TypeVariable "int" -> TypeVariable "float"
-      | _, _ -> raise (Failure "div: Invalid binop types"))
-  | Exp -> (
-      match (t1, t2) with
-      | TypeVariable "int", TypeVariable "int" -> TypeVariable "int"
-      | TypeVariable "float", TypeVariable "int" -> TypeVariable "float"
-      | _, _ -> raise (Failure "exp: Invalid binop types"))
+      | _, _ -> raise (Failure (binop_err_msg t1 t2 op)))
   
 and binop_err_msg t1 t2 op =
   "Binop type error, got " ^ (string_of_typevar t1) ^ " and " ^ (string_of_typevar t2) 

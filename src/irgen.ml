@@ -134,7 +134,8 @@ let translate block_list =
         | A.Add -> float_converter e1' L.build_add L.build_fadd e2' builder
         | A.Sub -> float_converter e1' L.build_sub L.build_fsub e2' builder
         | A.Mult -> float_converter e1' L.build_mul L.build_fmul e2' builder
-        | A.FDiv -> float_converter e1' L.build_sdiv L.build_sdiv e2' builder
+        | A.FDiv -> raise (Failure "Floor Division not yet supported")
+          (* float_converter e1' L.build_sdiv L.build_sdiv e2' builder *)
         | A.Mod -> float_converter e1' L.build_srem L.build_frem e2' builder
         | A.And -> L.build_and e1' e2' "tmp" builder
         | A.Or -> L.build_or e1' e2' "tmp" builder
