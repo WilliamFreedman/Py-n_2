@@ -76,5 +76,6 @@ else
 fi
 
 # Optionally, remove temporary files
-# rm "$modified_filename.ll"
-# rm pyn.native
+rm "$modified_filename.ll"
+rm "$modified_filename"
+rm pyn.native
