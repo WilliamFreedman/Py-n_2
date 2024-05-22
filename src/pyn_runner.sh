@@ -69,7 +69,6 @@ ocamlbuild -r -pkgs llvm pyn.native
 
 # Execute the appropriate actions based on the mode
 if [ "$to_run" -eq 1 ]; then
-    echo "Executing LLVM code"
     cat "$modified_filename" | ./pyn.native -l > "$modified_filename.ll"
     lli "$modified_filename.ll"
 else
