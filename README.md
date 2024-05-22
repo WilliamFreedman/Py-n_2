@@ -8,6 +8,7 @@ Next steps for Py^n, ordered by importance (this order might change):
 
 - Adding indentation to the parser to allow it to insert INDENT and DEDENT tokens itself.
     - This is currently handled by the preprocessor, but it's given us more trouble than it's worth.
+- Edit tester file for new parsing
 - Fixing newline/blank line bugs in the parser. 
     - We are getting weird bugs with newlines after if statements, I think the entire way the cfg handles
     new lines should be reworked.
