@@ -42,7 +42,7 @@
 %%
 
 program_rule:
-    block_list EOF { { body = $1 } }
+    newline_list block_list EOF { { body = $2 } }
 
 block_list:
     // /* nothing */ {[]}
@@ -51,7 +51,8 @@ block_list:
       //  block newline_list                  { [] }
 
 newline_list:
-	NEWLINE {}
+    {}
+	// | NEWLINE {} 
 	| newline_list NEWLINE {}
 
 block:
