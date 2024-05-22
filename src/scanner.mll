@@ -8,6 +8,7 @@ let alphabet = ['a'-'z' 'A'-'Z' '0'-'9' '!' '@' '#' '$' '%' '^' '&' '*' '(' ')' 
 
 rule tokenize = parse
   [' ' '\t' '\r'] { tokenize lexbuf }
+| "#"     { comment lexbuf }           (* Comments *)
 | '\n' { NEWLINE }
 | "->" { ARROW }
 | '+' { PLUS }
@@ -90,3 +91,6 @@ rule tokenize = parse
 | ['a'-'z''A'-'Z''_']+['a'-'z''A'-'Z''_' '0'-'9']* as id { VARIABLE(id) }
 | eof { EOF }
 
+and comment = parse
+  "\n" { tokenize lexbuf }
+| _    { comment lexbuf }
