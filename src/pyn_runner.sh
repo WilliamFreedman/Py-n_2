@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Ensure at least one argument is passed
-if [ $# -lt 2 ]; then
+if [ $# -eq 0 ] || [ $# -gt 2 ]; then
+    echo $#
     echo "Usage: $0 [-a|-s|-l|-r] <filename>"
     exit 1
 fi
