@@ -1,5 +1,5 @@
 %{
-open Ast
+    open Ast
 %}
 
 %token NEWLINE PLUS MINUS TIMES DIVIDE DOT LPAREN RPAREN LBRACK RBRACK LCURL RCURL COMMA
@@ -189,15 +189,17 @@ while_loop:
 for_loop:
 	FOR VARIABLE IN expr COLON NEWLINE INDENT block_list DEDENT   { For(Var($2), $4, $8)  }
 
-variable_list:
-	/* nothing */                   { []            }
-	| VARIABLE                      { [Var($1)]     }
-	| VARIABLE COMMA variable_list  { Var($1) :: $3 }
 
-func_signature_list:
-	/* nothing */                                       { []        }
-	| func_signature                                    { [$1]      }
-	| func_signature newline_list func_signature_list   { $1 :: $3  }
+// variable_list:
+// 	/* nothing */                   { []            }
+// 	| VARIABLE                      { [Var($1)]     }
+// 	| VARIABLE COMMA variable_list  { Var($1) :: $3 }
+
+
+// func_signature_list:
+// 	/* nothing */                                       { []        }
+// 	| func_signature                                    { [$1]      }
+// 	| func_signature newline_list func_signature_list   { $1 :: $3  }
 
 func_signature:
 	DEF VARIABLE LPAREN args_list RPAREN ARROW typename { (Var($2), $4, $7) }
