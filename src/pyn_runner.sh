@@ -64,6 +64,8 @@ rm preprocessor.cmo preprocessor.cmi
 # Run the preprocessor
 ./preprocessor "$filename" "$modified_filename"
 
+rm ./preprocessor
+
 # Build the main program
 ocamlbuild -r -pkgs llvm pyn.native
 
