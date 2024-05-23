@@ -117,9 +117,9 @@ let rec string_of_sblock = function
       string_of_svar v ^ ": " ^ string_of_typevar t ^ " = "
       ^ string_of_sexpr expr ^ "\n"
   | SWhile (e, block_list) ->
-      "while " ^ string_of_sexpr e ^ ":\n"
+      "while " ^ string_of_sexpr e ^ ":\n{\n"
       ^ String.concat "" (List.map string_of_sblock block_list)
-      ^ "\n"
+      ^ "}\n"
   | SFor (v, e, block_list) ->
       "for " ^ string_of_svar v ^ " in " ^ string_of_sexpr e ^ ":\n"
       ^ String.concat "" (List.map string_of_sblock block_list)
@@ -128,14 +128,14 @@ let rec string_of_sblock = function
       string_of_svar v ^ "("
       ^ String.concat ", " (List.map string_of_sexpr e)
       ^ ")" ^ "\n"
-  | SReturnVal e -> "return " ^ string_of_sexpr e ^ "\n"
-  | SReturnVoid -> "return" ^ "\n"
+  | SReturnVal e -> "value_return " ^ string_of_sexpr e ^ "\n"
+  | SReturnVoid -> "void_return" ^ "\n"
   | SFunctionSignature signature -> string_of_sfunc_sig signature ^ "\n"
   | SFunctionDefinition (signature, block_list) ->
       string_of_sfunc_sig signature
-      ^ "\n"
+      ^ "\n{\n"
       ^ String.concat "" (List.map string_of_sblock block_list)
-      ^ "\n"
+      ^ "}\n"
   | SBreak -> "break\n"
   | SContinue -> "continue\n"
   | SPass -> "pass\n"
@@ -154,9 +154,9 @@ let rec string_of_sblock = function
       ^ String.concat "\n" (List.map string_of_sblock block_list)
       ^ "\n"
   | SIfEnd (e, bl) ->
-      "if " ^ string_of_sexpr e ^ ":\n"
+      "if " ^ string_of_sexpr e ^ ":\n{\n"
       ^ String.concat "\n" (List.map string_of_sblock bl)
-      ^ "\n"
+      ^ "}\n"
   | SIfNonEnd (e, bl, nbl) ->
       "if " ^ string_of_sexpr e ^ ":\n"
       ^ String.concat "\n" (List.map string_of_sblock bl)
