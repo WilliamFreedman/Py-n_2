@@ -237,8 +237,8 @@ let rec string_of_block = function
       ^ String.concat "\n" (List.map string_of_block bl)
       ^ "}" ^ "\n"
   | ElifNonEnd (e, bl, nbl) ->
-      "elif " ^ string_of_expr e ^ ":\n"
-      ^ String.concat "\n" (List.map string_of_block bl)
+      "elif " ^ string_of_expr e ^ ":\n" ^ "{" ^ "\n"
+      ^ String.concat "\n" (List.map string_of_block bl) ^ "}" ^ "\n"
       ^ string_of_block nbl
   | ElseEnd bl ->
       "else:\n" ^ String.concat "\n" (List.map string_of_block bl) ^ "\n"
