@@ -56,15 +56,15 @@ fi
 modified_filename="preprocessed.pyn"
 
 # Preprocess the file
-ocamlc -o preprocessor str.cma preprocessor.ml
+ocamlc -o preprocessor_blank str.cma preprocessor_blank.ml
 
 # Remove intermediate OCaml compilation files
-rm preprocessor.cmo preprocessor.cmi
+rm preprocessor_blank.cmo preprocessor_blank.cmi
 
-# Run the preprocessor
-./preprocessor "$filename" "$modified_filename"
+# Run the preprocessor_blank
+./preprocessor_blank "$filename" "$modified_filename"
 
-rm ./preprocessor
+rm ./preprocessor_blank
 
 # Build the main program
 ocamlbuild -r -pkgs llvm pyn.native
