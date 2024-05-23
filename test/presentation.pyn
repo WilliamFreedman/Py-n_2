@@ -7,7 +7,6 @@ def fib(n: int) -> int:
         return 0
     elif n == 1:
         return 1
-    
     return fib(n - 1) + fib(n - 2)
 
 
@@ -18,7 +17,7 @@ while (x < 10):
     if x == 5:
         continue
     
-    print_int(fib(x))
+    #print_int(fib(x))
 
 
 def fib_iter(n: int) -> int:
@@ -38,7 +37,7 @@ def fib_iter(n: int) -> int:
     return result
 
 
-print_int(fib_iter(20))
+#print_int(fib_iter(20))
 
 
 def cylinder_volume(radius: int, height: int) -> float:
@@ -46,4 +45,4 @@ def cylinder_volume(radius: int, height: int) -> float:
     
     return pi * radius * radius * height
 
-print_float(cylinder_volume(10, 4))
+#print_float(cylinder_volume(10, 4))

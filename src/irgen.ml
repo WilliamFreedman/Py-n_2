@@ -10,7 +10,8 @@ let translate block_list =
   let int_t = L.i32_type context
   and float_t = L.double_type context
   and bool_t = L.i1_type context
-  and char_t = L.i8_type context in
+  and char_t = L.i8_type context
+  and void_t = L.void_type context in
 
   let char_pt = L.pointer_type char_t in
 
@@ -25,8 +26,11 @@ let translate block_list =
     | A.TypeVariable "bool" -> bool_t
     | A.TypeVariable "float" -> float_t
     | A.TypeVariable "string" -> char_pt
-    | _ -> raise (Failure " Not implemented yet")
+    | A.TypeVariable "void" -> void_t
+    | _ -> raise (Failure "This type is not implemented yet")
   and
+   func_return_type func_ll = L.return_type (L.type_of func_ll)
+   and
       (* Assigns an expression (rvalue's) llvalue to the variable's llvalue (w/ name var_name) *)
       (* Returns a builder! *)
       variable_assignment_helper var_map func_map var_name rvalue builder =
@@ -287,7 +291,11 @@ let translate block_list =
           List.rev
             (List.map (build_expr var_map func_map builder) (List.rev args))
         in
-        let result = string_of_svar svariable ^ "_result" in
+        let rtype = func_return_type func_ll in
+        let result = if rtype=void_t then
+          string_of_svar svariable ^ "_result" 
+        else
+        "" in
         ignore (L.build_call func_ll (Array.of_list llargs) result builder);
         (var_map, func_map, builder)
     | SFunctionDefinition (sfunction_signature, block_list) ->

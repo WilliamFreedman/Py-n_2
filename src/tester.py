@@ -35,7 +35,8 @@ def main ():
         ("../test/test_break_loop1.pyn", "../test/test_break_loop1.txt"),
         ("../test/test_recursion1.pyn", "../test/test_recursion1.txt"),
         ("../test/test_macro.pyn", "../test/test_macro.txt"),
-         ("../test/test_ops.pyn", "../test/test_ops.txt")
+        ("../test/test_ops.pyn", "../test/test_ops.txt"),
+        ("../test/test_void_ret.pyn", "../test/test_ops.txt")
         
     ]
     tests_passed = 0

@@ -1,0 +1,14 @@
+def while_tester() -> void:
+    i : int = 0
+
+    while True:
+        print_int(i)
+        i += 1
+        
+
+        if (i>5):
+            return
+    return
+    
+
+while_tester()
